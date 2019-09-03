@@ -1,0 +1,62 @@
+## This code creates many different kinds of graphs that help explore the Pokemon data
+#A kaggle notebook with this code can be found at
+#https://www.kaggle.com/mlomuscio/exploring-pokemon-data-with-graphs
+
+#Set categorical variables as categorical.
+Pokemon$Type1 <- as.factor(Pokemon$Type1)
+Pokemon$Type2 <- as.factor(Pokemon$Type2)
+Pokemon$Generation <- as.factor(Pokemon$Generation)
+
+#Load the tidyverse library
+library(tidyverse)
+
+#This code creates a density plot for a quant variable
+ggplot(data = Pokemon) +
+  geom_density(mapping = aes(x=HP))
+
+ggplot(data = Pokemon) +
+  geom_histogram(mapping = aes(x=HP))
+
+ggplot(data = Pokemon) +
+  geom_histogram(mapping = aes(x=HP), binwidth = 10)
+
+ggplot(data = Pokemon) +
+  geom_boxplot(mapping = aes(y=HP))
+
+
+#This code creates a bar graph of a categorical variable
+ggplot(data = Pokemon) +
+  geom_bar(mapping = aes(x=Type1))
+ 
+#This code creates a bar graph of a categorical variable
+ggplot(data = Pokemon) +
+  geom_bar(mapping = aes(x=Generation))
+
+#This code creates a table that shows how many cases fall into each category.
+table(Pokemon$Type1)
+
+
+#This code creates a scatter plot
+ggplot(data = Pokemon) +
+  geom_point(mapping = aes(x=HP, y=Attack))
+
+ggplot(data = Pokemon) +
+  geom_point(mapping = aes(x=Attack, y=Defense))
+
+ggplot(data = Pokemon) +
+  geom_point(mapping = aes(x=Attack, y=SpAtk))
+
+#Quant vs Cat
+ggplot(data = Pokemon) +
+  geom_boxplot(mapping = aes(x=Legendary, y=HP))
+
+ggplot(data = Pokemon) +
+  geom_density(mapping = aes(x=HP, fill=Legendary))
+
+ggplot(data = Pokemon) +
+  geom_density(mapping = aes(x=HP, fill=Legendary), alpha=0.5)
+
+
+#quant vs quant vs cat (Clustered Scatter Plot)
+ggplot(data = Pokemon) +
+  geom_point(mapping = aes(x=Attack, y=Defense, color = Legendary))
